@@ -16,19 +16,54 @@ body {
   overflow-x: hidden;
 }
 
-/* ---------------- QUESTION SCREEN ---------------- */
-.question {
+/* ========== PASSWORD SCREEN ========== */
+.password-screen {
   min-height: 100vh;
   display: flex;
-  flex-direction: column;
   justify-content: center;
   align-items: center;
   text-align: center;
   padding: 40px 20px;
 }
 
+.password-box {
+  background: rgba(255,255,255,0.25);
+  backdrop-filter: blur(10px);
+  padding: 40px;
+  border-radius: 26px;
+  box-shadow: 0 20px 45px rgba(0,0,0,0.3);
+}
+
+.password-box input {
+  padding: 12px 20px;
+  border-radius: 20px;
+  border: none;
+  outline: none;
+  font-size: 16px;
+  margin-top: 20px;
+  text-align: center;
+}
+
+.password-box button {
+  margin-top: 20px;
+  padding: 10px 26px;
+  border-radius: 25px;
+  border: none;
+  background: #ff4d6d;
+  color: #fff;
+  cursor: pointer;
+}
+
+/* ========== QUESTION SCREEN ========== */
+.question {
+  display: none;
+  min-height: 100vh;
+  text-align: center;
+  padding: 60px 20px;
+}
+
 .buttons {
-  margin-top: 30px;
+  margin: 30px auto 0;
   position: relative;
   width: 220px;
   height: 80px;
@@ -54,19 +89,18 @@ button {
   right: 0;
 }
 
-/* ---------------- MAIN CONTENT ---------------- */
+/* ========== MAIN CONTENT ========== */
 .wrapper {
-  display: none;            /* 🔒 hidden until YES */
+  display: none;
   max-width: 1300px;
   margin: auto;
   padding: 30px 20px 80px;
   display: grid;
   grid-template-columns: 1fr 1.2fr 1fr;
   gap: 25px;
-  align-items: start;
 }
 
-/* ---------------- PHOTO ROTATION ---------------- */
+/* ========== PHOTOS ========== */
 .photo-box {
   height: 80vh;
   border-radius: 28px;
@@ -94,7 +128,7 @@ button {
   100% { opacity: 0; }
 }
 
-/* ---------------- MESSAGE CARD ---------------- */
+/* ========== MESSAGE ========== */
 .message {
   background: rgba(255,255,255,0.25);
   backdrop-filter: blur(10px);
@@ -104,7 +138,7 @@ button {
   box-shadow: 0 20px 45px rgba(0,0,0,0.3);
 }
 
-/* ---------------- CONFETTI ---------------- */
+/* ========== EFFECTS ========== */
 .confetti {
   position: fixed;
   width: 10px;
@@ -114,11 +148,9 @@ button {
 }
 
 @keyframes confettiFall {
-  from { transform: translateY(-10px) rotate(0deg); }
   to { transform: translateY(100vh) rotate(360deg); opacity: 0; }
 }
 
-/* ---------------- HEARTS ---------------- */
 .heart {
   position: fixed;
   font-size: 22px;
@@ -127,49 +159,49 @@ button {
 }
 
 @keyframes floatUp {
-  from { transform: translateY(100vh); opacity: 1; }
   to { transform: translateY(-10vh); opacity: 0; }
 }
 
-/* ---------------- MUSIC BUTTON ---------------- */
+/* ========== MUSIC BUTTON ========== */
 .music-btn {
-  display: none;            /* 🔒 hidden until YES */
+  display: none;
   position: fixed;
   bottom: 20px;
   right: 20px;
-  z-index: 1000;
+  border-radius: 50%;
+  border: none;
+  padding: 12px 14px;
   background: rgba(255,255,255,0.3);
   color: #fff;
-  border: none;
-  border-radius: 50%;
-  padding: 12px 14px;
   cursor: pointer;
-  font-size: 18px;
 }
 
-/* ---------------- MOBILE ---------------- */
+/* ========== MOBILE ========== */
 @media (max-width: 900px) {
-  .wrapper {
-    grid-template-columns: 1fr;
-  }
-  .photo-box {
-    height: 55vh;
-  }
-  .message {
-    margin: 30px 0;
-  }
+  .wrapper { grid-template-columns: 1fr; }
+  .photo-box { height: 55vh; }
+  .message { margin: 30px 0; }
 }
 </style>
 </head>
 
 <body>
 
-<!-- 🎶 MUSIC -->
 <audio id="bgMusic" loop>
   <source src="music.mp3" type="audio/mpeg">
 </audio>
 
 <button class="music-btn" onclick="toggleMusic()">🎵</button>
+
+<!-- PASSWORD -->
+<div class="password-screen" id="passwordScreen">
+  <div class="password-box">
+    <h2>This page is only for someone special 💖</h2>
+    <input type="password" id="passwordInput" placeholder="Enter password">
+    <br>
+    <button onclick="checkPassword()">Enter</button>
+  </div>
+</div>
 
 <!-- QUESTION -->
 <div class="question" id="question">
@@ -184,8 +216,6 @@ button {
 
 <!-- MAIN CONTENT -->
 <div class="wrapper" id="mainContent">
-
-  <!-- LEFT PHOTOS (9) -->
   <div class="photo-box">
     <img src="photo1.jpg" style="--i:0">
     <img src="photo3.jpg" style="--i:1">
@@ -198,17 +228,14 @@ button {
     <img src="photo17.jpg" style="--i:8">
   </div>
 
-  <!-- MESSAGE -->
   <div class="message">
     <h1>Thank you Kutty 💘</h1>
     <p>Thank you for being the reason I smile!</p>
     <p>Thank you for coming into my life!</p>
-    <p>Every moment and memory that I am having with you is worth remembering!</p>
-    <p>My love for you grows deeper with every passing day Kutty 💕</p>
+    <p>Every moment with you is worth remembering.</p>
     <p><b>I love you more! Day by day ❤️🌹</b></p>
   </div>
 
-  <!-- RIGHT PHOTOS (9) -->
   <div class="photo-box">
     <img src="photo2.jpg" style="--i:0">
     <img src="photo4.jpg" style="--i:1">
@@ -220,16 +247,24 @@ button {
     <img src="photo16.jpg" style="--i:7">
     <img src="photo18.jpg" style="--i:8">
   </div>
-
 </div>
 
 <script>
-const noBtn = document.getElementById("noBtn");
+const CORRECT_PASSWORD = "kuttyILU"; // 🔑 CHANGE PASSWORD HERE
 const music = document.getElementById("bgMusic");
 let musicPlaying = false;
 
+function checkPassword() {
+  if (document.getElementById("passwordInput").value === CORRECT_PASSWORD) {
+    document.getElementById("passwordScreen").style.display = "none";
+    document.getElementById("question").style.display = "block";
+  } else {
+    alert("Oops 😅 Try again");
+  }
+}
+
 function moveNo() {
-  noBtn.style.transform =
+  document.getElementById("noBtn").style.transform =
     `translate(${Math.random()*120-60}px, ${Math.random()*40-20}px)`;
 }
 
@@ -237,12 +272,9 @@ function sayYes() {
   document.getElementById("question").style.display = "none";
   document.getElementById("mainContent").style.display = "grid";
   document.querySelector(".music-btn").style.display = "block";
-
   startMusic();
   confettiBurst();
   startHearts();
-
-  window.scrollTo({ top: 0, behavior: "smooth" });
 }
 
 function startMusic() {
