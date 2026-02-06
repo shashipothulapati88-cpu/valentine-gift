@@ -1,40 +1,41 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>For Kutty ❤️</title>
 
 <style>
-* {
-    box-sizing: border-box;
-}
+* { box-sizing: border-box; }
 
 body {
-    margin: 0;
-    height: 100vh;
-    font-family: 'Segoe UI', sans-serif;
-    overflow: hidden;
-    background: #000;
+  margin: 0;
+  height: 100vh;
+  font-family: 'Segoe UI', system-ui, -apple-system, Arial, sans-serif;
+  overflow: hidden;
+  background: #000;
 }
 
-/* FULL SCREEN BACKGROUND SLIDESHOW */
+/* ===== FULL SCREEN BACKGROUND SLIDESHOW ===== */
 .bg-slideshow {
-    position: fixed;
-    inset: 0;
-    z-index: 1;
+  position: fixed;
+  inset: 0;
+  z-index: 1;
 }
 
 .bg-slideshow img {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: contain; /* 🔥 prevents over zoom */
-    opacity: 0;
-    animation: slideShow 25s infinite;
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  /* Use CONTAIN to avoid over-zoom */
+  object-fit: contain;
+  background: #000;        /* fills empty space nicely */
+  opacity: 0;
+  animation: slideShow 25s infinite;
 }
 
-/* Timing */
+/* timing */
 .bg-slideshow img:nth-child(1) { animation-delay: 0s; }
 .bg-slideshow img:nth-child(2) { animation-delay: 5s; }
 .bg-slideshow img:nth-child(3) { animation-delay: 10s; }
@@ -42,67 +43,68 @@ body {
 .bg-slideshow img:nth-child(5) { animation-delay: 20s; }
 
 @keyframes slideShow {
-    0%   { opacity: 0; }
-    10%  { opacity: 0.85; }
-    30%  { opacity: 0.85; }
-    40%  { opacity: 0; }
-    100% { opacity: 0; }
+  0%   { opacity: 0; }
+  10%  { opacity: 0.9; }
+  30%  { opacity: 0.9; }
+  40%  { opacity: 0; }
+  100% { opacity: 0; }
 }
 
-/* SOFT DARK OVERLAY (NOT PINK) */
+/* ===== SOFT DARK OVERLAY (NO PINK WASH) ===== */
 .overlay {
-    position: fixed;
-    inset: 0;
-    background: linear-gradient(
-        rgba(0,0,0,0.45),
-        rgba(0,0,0,0.55)
-    );
-    z-index: 2;
+  position: fixed;
+  inset: 0;
+  background: linear-gradient(
+    rgba(0,0,0,0.45),
+    rgba(0,0,0,0.55)
+  );
+  z-index: 2;
 }
 
-/* CENTER MESSAGE */
+/* ===== CENTER MESSAGE ===== */
 .container {
-    position: relative;
-    z-index: 3;
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 20px;
+  position: relative;
+  z-index: 3;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
 }
 
 .card {
-    background: rgba(255, 255, 255, 0.18);
-    backdrop-filter: blur(8px);
-    padding: 40px 30px;
-    border-radius: 22px;
-    max-width: 520px;
-    text-align: center;
-    color: #fff;
-    box-shadow: 0 20px 45px rgba(0,0,0,0.35);
-    animation: fadeIn 1.8s ease;
+  max-width: 520px;
+  text-align: center;
+  color: #fff;
+  background: rgba(255,255,255,0.18);
+  backdrop-filter: blur(8px);
+  border-radius: 22px;
+  padding: 38px 30px;
+  box-shadow: 0 20px 45px rgba(0,0,0,0.35);
+  animation: fadeIn 1.6s ease;
 }
 
 .card h1 {
-    font-size: 2rem;
-    margin-bottom: 20px;
+  margin: 0 0 18px;
+  font-size: 2rem;
 }
 
 .card p {
-    font-size: 1.05rem;
-    line-height: 1.7;
-    margin-bottom: 15px;
+  margin: 0 0 14px;
+  font-size: 1.05rem;
+  line-height: 1.7;
 }
 
 @keyframes fadeIn {
-    from {
-        opacity: 0;
-        transform: scale(0.92);
-    }
-    to {
-        opacity: 1;
-        transform: scale(1);
-    }
+  from { opacity: 0; transform: scale(0.95); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+/* ===== MOBILE TWEAKS ===== */
+@media (max-width: 600px) {
+  .card { padding: 30px 22px; }
+  .card h1 { font-size: 1.7rem; }
+  .card p { font-size: 1rem; }
 }
 </style>
 </head>
@@ -111,11 +113,11 @@ body {
 
 <!-- BACKGROUND SLIDESHOW -->
 <div class="bg-slideshow">
-    <img src="photo1.jpg">
-    <img src="photo2.jpg">
-    <img src="photo3.jpg">
-    <img src="photo4.jpg">
-    <img src="photo5.jpg">
+  <img src="photo1.jpg" alt="">
+  <img src="photo2.jpg" alt="">
+  <img src="photo3.jpg" alt="">
+  <img src="photo4.jpg" alt="">
+  <img src="photo5.jpg" alt="">
 </div>
 
 <!-- OVERLAY -->
@@ -123,24 +125,24 @@ body {
 
 <!-- MESSAGE -->
 <div class="container">
-    <div class="card">
-        <h1>Thank you Kutty 💘</h1>
+  <div class="card">
+    <h1>Thank you Kutty 💘</h1>
 
-        <p>Thank you for being the reason I smile!</p>
-        <p>Thank you for coming into my life!</p>
+    <p>Thank you for being the reason I smile!</p>
+    <p>Thank you for coming into my life!</p>
 
-        <p>
-            Every moment and memory that I am having with you  
-            is worth remembering!
-        </p>
+    <p>
+      Every moment and memory that I am having with you
+      is worth remembering!
+    </p>
 
-        <p>
-            I wish I could hold onto every single memory forever.<br>
-            My love for you grows deeper with every passing day Kutty 💕
-        </p>
+    <p>
+      I wish I could hold onto every single memory forever.<br/>
+      My love for you grows deeper with every passing day Kutty 💕
+    </p>
 
-        <p><b>I love you more! Day by day ❤️🌹</b></p>
-    </div>
+    <p><b>I love you more! Day by day ❤️🌹</b></p>
+  </div>
 </div>
 
 </body>
