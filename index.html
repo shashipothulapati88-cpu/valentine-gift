@@ -16,7 +16,7 @@ body {
   overflow-x: hidden;
 }
 
-/* ========== PASSWORD SCREEN ========== */
+/* ================= PASSWORD SCREEN ================= */
 .password-screen {
   min-height: 100vh;
   display: flex;
@@ -35,12 +35,11 @@ body {
 }
 
 .password-box input {
+  margin-top: 20px;
   padding: 12px 20px;
   border-radius: 20px;
   border: none;
-  outline: none;
   font-size: 16px;
-  margin-top: 20px;
   text-align: center;
 }
 
@@ -54,7 +53,7 @@ body {
   cursor: pointer;
 }
 
-/* ========== QUESTION SCREEN ========== */
+/* ================= QUESTION SCREEN ================= */
 .question {
   display: none;
   min-height: 100vh;
@@ -89,18 +88,17 @@ button {
   right: 0;
 }
 
-/* ========== MAIN CONTENT ========== */
+/* ================= MAIN CONTENT ================= */
 .wrapper {
-  display: none;
+  display: none;                /* 🔒 hidden initially */
   max-width: 1300px;
   margin: auto;
   padding: 30px 20px 80px;
-  display: grid;
   grid-template-columns: 1fr 1.2fr 1fr;
   gap: 25px;
 }
 
-/* ========== PHOTOS ========== */
+/* ================= PHOTOS ================= */
 .photo-box {
   height: 80vh;
   border-radius: 28px;
@@ -128,7 +126,7 @@ button {
   100% { opacity: 0; }
 }
 
-/* ========== MESSAGE ========== */
+/* ================= MESSAGE ================= */
 .message {
   background: rgba(255,255,255,0.25);
   backdrop-filter: blur(10px);
@@ -138,7 +136,7 @@ button {
   box-shadow: 0 20px 45px rgba(0,0,0,0.3);
 }
 
-/* ========== EFFECTS ========== */
+/* ================= EFFECTS ================= */
 .confetti {
   position: fixed;
   width: 10px;
@@ -162,7 +160,7 @@ button {
   to { transform: translateY(-10vh); opacity: 0; }
 }
 
-/* ========== MUSIC BUTTON ========== */
+/* ================= MUSIC BUTTON ================= */
 .music-btn {
   display: none;
   position: fixed;
@@ -176,7 +174,7 @@ button {
   cursor: pointer;
 }
 
-/* ========== MOBILE ========== */
+/* ================= MOBILE ================= */
 @media (max-width: 900px) {
   .wrapper { grid-template-columns: 1fr; }
   .photo-box { height: 55vh; }
@@ -187,13 +185,14 @@ button {
 
 <body>
 
+<!-- 🎶 MUSIC -->
 <audio id="bgMusic" loop>
   <source src="music.mp3" type="audio/mpeg">
 </audio>
 
 <button class="music-btn" onclick="toggleMusic()">🎵</button>
 
-<!-- PASSWORD -->
+<!-- PASSWORD SCREEN -->
 <div class="password-screen" id="passwordScreen">
   <div class="password-box">
     <h2>This page is only for someone special 💖</h2>
@@ -203,7 +202,7 @@ button {
   </div>
 </div>
 
-<!-- QUESTION -->
+<!-- QUESTION SCREEN -->
 <div class="question" id="question">
   <h1>Hi Kutty 🥰</h1>
   <h2>Will you be my Valentine ❤️?</h2>
@@ -216,6 +215,8 @@ button {
 
 <!-- MAIN CONTENT -->
 <div class="wrapper" id="mainContent">
+
+  <!-- LEFT PHOTOS -->
   <div class="photo-box">
     <img src="photo1.jpg" style="--i:0">
     <img src="photo3.jpg" style="--i:1">
@@ -228,14 +229,16 @@ button {
     <img src="photo17.jpg" style="--i:8">
   </div>
 
+  <!-- MESSAGE -->
   <div class="message">
     <h1>Thank you Kutty 💘</h1>
     <p>Thank you for being the reason I smile!</p>
     <p>Thank you for coming into my life!</p>
-    <p>Every moment with you is worth remembering.</p>
+    <p>Every moment and memory that I am having with you is worth remembering!</p>
     <p><b>I love you more! Day by day ❤️🌹</b></p>
   </div>
 
+  <!-- RIGHT PHOTOS -->
   <div class="photo-box">
     <img src="photo2.jpg" style="--i:0">
     <img src="photo4.jpg" style="--i:1">
@@ -247,10 +250,11 @@ button {
     <img src="photo16.jpg" style="--i:7">
     <img src="photo18.jpg" style="--i:8">
   </div>
+
 </div>
 
 <script>
-const CORRECT_PASSWORD = "kuttyILU"; // 🔑 CHANGE PASSWORD HERE
+const CORRECT_PASSWORD = "kuttyILU";   // 🔑 change if needed
 const music = document.getElementById("bgMusic");
 let musicPlaying = false;
 
@@ -270,11 +274,17 @@ function moveNo() {
 
 function sayYes() {
   document.getElementById("question").style.display = "none";
-  document.getElementById("mainContent").style.display = "grid";
+
+  const content = document.getElementById("mainContent");
+  content.style.display = "grid";   // ✅ shown ONLY here
+
   document.querySelector(".music-btn").style.display = "block";
+
   startMusic();
   confettiBurst();
   startHearts();
+
+  window.scrollTo({ top: 0, behavior: "smooth" });
 }
 
 function startMusic() {
