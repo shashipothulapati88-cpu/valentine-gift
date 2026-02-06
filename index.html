@@ -17,6 +17,7 @@ body {
   align-items: center;
   justify-content: center;
   color: #fff;
+  overflow: hidden;
 }
 
 /* ===== MAIN LAYOUT ===== */
@@ -30,7 +31,7 @@ body {
   align-items: center;
 }
 
-/* ===== PHOTO ROTATION BOX ===== */
+/* ===== PHOTO ROTATION (UNLIMITED) ===== */
 .photo-box {
   height: 80vh;
   border-radius: 28px;
@@ -46,23 +47,15 @@ body {
   height: 100%;
   object-fit: cover;
   opacity: 0;
-  animation: fadeSlide 15s infinite;
+  animation: fadeSlide 36s infinite;
+  animation-delay: calc(var(--i) * 4s);
 }
 
-/* Left photos */
-.left-photo img:nth-child(1) { animation-delay: 0s; }
-.left-photo img:nth-child(2) { animation-delay: 5s; }
-.left-photo img:nth-child(3) { animation-delay: 10s; }
-
-/* Right photos */
-.right-photo img:nth-child(1) { animation-delay: 0s; }
-.right-photo img:nth-child(2) { animation-delay: 7.5s; }
-
 @keyframes fadeSlide {
-  0% { opacity: 0; }
-  10% { opacity: 1; }
-  40% { opacity: 1; }
-  50% { opacity: 0; }
+  0%   { opacity: 0; }
+  10%  { opacity: 1; }
+  35%  { opacity: 1; }
+  45%  { opacity: 0; }
   100% { opacity: 0; }
 }
 
@@ -125,6 +118,48 @@ button {
   margin-bottom: 15px;
 }
 
+/* ===== CONFETTI ===== */
+.confetti {
+  position: fixed;
+  width: 10px;
+  height: 10px;
+  animation: confettiFall 3s linear forwards;
+  z-index: 999;
+}
+
+@keyframes confettiFall {
+  from { transform: translateY(-10px) rotate(0deg); }
+  to { transform: translateY(100vh) rotate(360deg); opacity: 0; }
+}
+
+/* ===== FLOATING HEARTS ===== */
+.heart {
+  position: fixed;
+  font-size: 22px;
+  animation: floatUp 6s linear forwards;
+  z-index: 998;
+}
+
+@keyframes floatUp {
+  from { transform: translateY(100vh); opacity: 1; }
+  to { transform: translateY(-10vh); opacity: 0; }
+}
+
+/* ===== MUSIC BUTTON ===== */
+.music-btn {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 1000;
+  background: rgba(255,255,255,0.3);
+  color: #fff;
+  border: none;
+  border-radius: 50%;
+  padding: 12px 14px;
+  cursor: pointer;
+  font-size: 18px;
+}
+
 /* ===== ANIMATIONS ===== */
 @keyframes fadeIn {
   from { opacity: 0; transform: scale(0.92); }
@@ -133,19 +168,22 @@ button {
 
 /* ===== MOBILE ===== */
 @media (max-width: 900px) {
-  .wrapper {
-    grid-template-columns: 1fr;
-  }
-  .photo-box {
-    height: 55vh;
-  }
+  .wrapper { grid-template-columns: 1fr; }
+  .photo-box { height: 55vh; }
 }
 </style>
 </head>
 
 <body>
 
-<!-- QUESTION SCREEN -->
+<!-- 🎶 MUSIC -->
+<audio id="bgMusic" loop>
+  <source src="music.mp3" type="audio/mpeg">
+</audio>
+
+<button class="music-btn" onclick="toggleMusic()">🎵</button>
+
+<!-- QUESTION -->
 <div class="question-card" id="question">
   <h1>Hi Kutty 🥰</h1>
   <h2>Will you be my Valentine ❤️?</h2>
@@ -159,43 +197,48 @@ button {
 <!-- MAIN CONTENT -->
 <div class="wrapper" id="mainContent">
 
-  <!-- LEFT PHOTOS -->
-  <div class="photo-box left-photo">
-    <img src="photo1.jpg">
-    <img src="photo3.jpg">
-    <img src="photo5.jpg">
+  <!-- LEFT PHOTOS (9) -->
+  <div class="photo-box">
+    <img src="photo1.jpg"  style="--i:0">
+    <img src="photo3.jpg"  style="--i:1">
+    <img src="photo5.jpg"  style="--i:2">
+    <img src="photo7.jpg"  style="--i:3">
+    <img src="photo9.jpg"  style="--i:4">
+    <img src="photo11.jpg" style="--i:5">
+    <img src="photo13.jpg" style="--i:6">
+    <img src="photo15.jpg" style="--i:7">
+    <img src="photo17.jpg" style="--i:8">
   </div>
 
   <!-- MESSAGE -->
   <div class="message-card">
     <h1>Thank you Kutty 💘</h1>
-
     <p>Thank you for being the reason I smile!</p>
     <p>Thank you for coming into my life!</p>
-
-    <p>
-      Every moment and memory that I am having with you
-      is worth remembering!
-    </p>
-
-    <p>
-      I wish I could hold onto every single memory forever.<br>
-      My love for you grows deeper with every passing day Kutty 💕
-    </p>
-
+    <p>Every moment and memory that I am having with you is worth remembering!</p>
+    <p>My love for you grows deeper with every passing day Kutty 💕</p>
     <p><b>I love you more! Day by day ❤️🌹</b></p>
   </div>
 
-  <!-- RIGHT PHOTOS -->
-  <div class="photo-box right-photo">
-    <img src="photo2.jpg">
-    <img src="photo4.jpg">
+  <!-- RIGHT PHOTOS (9) -->
+  <div class="photo-box">
+    <img src="photo2.jpg"  style="--i:0">
+    <img src="photo4.jpg"  style="--i:1">
+    <img src="photo6.jpg"  style="--i:2">
+    <img src="photo8.jpg"  style="--i:3">
+    <img src="photo10.jpg" style="--i:4">
+    <img src="photo12.jpg" style="--i:5">
+    <img src="photo14.jpg" style="--i:6">
+    <img src="photo16.jpg" style="--i:7">
+    <img src="photo18.jpg" style="--i:8">
   </div>
 
 </div>
 
 <script>
 const noBtn = document.getElementById("noBtn");
+const music = document.getElementById("bgMusic");
+let musicPlaying = false;
 
 function moveNo() {
   const x = Math.random() * 140 - 70;
@@ -206,6 +249,43 @@ function moveNo() {
 function sayYes() {
   document.getElementById("question").style.display = "none";
   document.getElementById("mainContent").style.display = "grid";
+  startMusic();
+  confettiBurst();
+  startHearts();
+}
+
+function startMusic() {
+  music.volume = 0.25;
+  music.play();
+  musicPlaying = true;
+}
+
+function toggleMusic() {
+  musicPlaying ? music.pause() : music.play();
+  musicPlaying = !musicPlaying;
+}
+
+function confettiBurst() {
+  for (let i = 0; i < 120; i++) {
+    const c = document.createElement("div");
+    c.className = "confetti";
+    c.style.left = Math.random() * 100 + "vw";
+    c.style.background = `hsl(${Math.random()*360},100%,50%)`;
+    document.body.appendChild(c);
+    setTimeout(() => c.remove(), 3000);
+  }
+}
+
+function startHearts() {
+  setInterval(() => {
+    const h = document.createElement("div");
+    h.className = "heart";
+    h.innerText = "💖";
+    h.style.left = Math.random() * 100 + "vw";
+    h.style.fontSize = (18 + Math.random() * 12) + "px";
+    document.body.appendChild(h);
+    setTimeout(() => h.remove(), 6000);
+  }, 500);
 }
 </script>
 
