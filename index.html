@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For Kutty ❤️</title>
+
+<style>
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: 'Segoe UI', system-ui, Arial, sans-serif;
+  background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+}
+
+/* ===== MAIN LAYOUT ===== */
+.wrapper {
+  width: 100%;
+  max-width: 1300px;
+  padding: 20px;
+  display: none;
+  grid-template-columns: 1fr 1.2fr 1fr;
+  gap: 30px;
+  align-items: center;
+}
+
+/* ===== PHOTO ROTATION BOX ===== */
+.photo-box {
+  height: 80vh;
+  border-radius: 28px;
+  overflow: hidden;
+  box-shadow: 0 18px 40px rgba(0,0,0,0.25);
+  position: relative;
+}
+
+.photo-box img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  animation: fadeSlide 15s infinite;
+}
+
+/* Left photos */
+.left-photo img:nth-child(1) { animation-delay: 0s; }
+.left-photo img:nth-child(2) { animation-delay: 5s; }
+.left-photo img:nth-child(3) { animation-delay: 10s; }
+
+/* Right photos */
+.right-photo img:nth-child(1) { animation-delay: 0s; }
+.right-photo img:nth-child(2) { animation-delay: 7.5s; }
+
+@keyframes fadeSlide {
+  0% { opacity: 0; }
+  10% { opacity: 1; }
+  40% { opacity: 1; }
+  50% { opacity: 0; }
+  100% { opacity: 0; }
+}
+
+/* ===== QUESTION CARD ===== */
+.question-card {
+  background: rgba(255,255,255,0.25);
+  backdrop-filter: blur(10px);
+  padding: 40px 35px;
+  border-radius: 26px;
+  text-align: center;
+  box-shadow: 0 20px 45px rgba(0,0,0,0.3);
+  animation: fadeIn 1.2s ease;
+}
+
+.buttons {
+  margin-top: 25px;
+  position: relative;
+  height: 80px;
+}
+
+button {
+  padding: 12px 26px;
+  font-size: 16px;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+}
+
+#yesBtn {
+  background: #ff4d6d;
+  color: #fff;
+}
+
+#noBtn {
+  background: #fff;
+  color: #ff4d6d;
+  position: absolute;
+  right: 0;
+}
+
+/* ===== MESSAGE CARD ===== */
+.message-card {
+  background: rgba(255,255,255,0.25);
+  backdrop-filter: blur(10px);
+  padding: 40px 35px;
+  border-radius: 26px;
+  text-align: center;
+  box-shadow: 0 20px 45px rgba(0,0,0,0.3);
+  animation: fadeIn 1.2s ease;
+}
+
+.message-card h1 {
+  margin-bottom: 20px;
+  font-size: 2rem;
+}
+
+.message-card p {
+  font-size: 1.05rem;
+  line-height: 1.7;
+  margin-bottom: 15px;
+}
+
+/* ===== ANIMATIONS ===== */
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.92); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+/* ===== MOBILE ===== */
+@media (max-width: 900px) {
+  .wrapper {
+    grid-template-columns: 1fr;
+  }
+  .photo-box {
+    height: 55vh;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<!-- QUESTION SCREEN -->
+<div class="question-card" id="question">
+  <h1>Hi Kutty 🥰</h1>
+  <h2>Will you be my Valentine ❤️?</h2>
+
+  <div class="buttons">
+    <button id="yesBtn" onclick="sayYes()">Yes</button>
+    <button id="noBtn" onmouseover="moveNo()" ontouchstart="moveNo()">No</button>
+  </div>
+</div>
+
+<!-- MAIN CONTENT -->
+<div class="wrapper" id="mainContent">
+
+  <!-- LEFT PHOTOS -->
+  <div class="photo-box left-photo">
+    <img src="photo1.jpg">
+    <img src="photo3.jpg">
+    <img src="photo5.jpg">
+  </div>
+
+  <!-- MESSAGE -->
+  <div class="message-card">
+    <h1>Thank you Kutty 💘</h1>
+
+    <p>Thank you for being the reason I smile!</p>
+    <p>Thank you for coming into my life!</p>
+
+    <p>
+      Every moment and memory that I am having with you
+      is worth remembering!
+    </p>
+
+    <p>
+      I wish I could hold onto every single memory forever.<br>
+      My love for you grows deeper with every passing day Kutty 💕
+    </p>
+
+    <p><b>I love you more! Day by day ❤️🌹</b></p>
+  </div>
+
+  <!-- RIGHT PHOTOS -->
+  <div class="photo-box right-photo">
+    <img src="photo2.jpg">
+    <img src="photo4.jpg">
+  </div>
+
+</div>
+
+<script>
+const noBtn = document.getElementById("noBtn");
+
+function moveNo() {
+  const x = Math.random() * 140 - 70;
+  const y = Math.random() * 40 - 20;
+  noBtn.style.transform = `translate(${x}px, ${y}px)`;
+}
+
+function sayYes() {
+  document.getElementById("question").style.display = "none";
+  document.getElementById("mainContent").style.display = "grid";
+}
+</script>
+
+</body>
+</html>
