@@ -13,66 +13,28 @@ body {
   min-height: 100vh;
   font-family: 'Segoe UI', system-ui, Arial, sans-serif;
   background: linear-gradient(135deg, #ff9a9e, #fad0c4);
-  display: flex;
-  align-items: center;
-  justify-content: center;
   color: #fff;
-  overflow: hidden;
-}
-
-/* ===== MAIN LAYOUT ===== */
-.wrapper {
-  width: 100%;
-  max-width: 1300px;
-  padding: 20px;
-  display: none;
-  grid-template-columns: 1fr 1.2fr 1fr;
-  gap: 30px;
-  align-items: center;
-}
-
-/* ===== PHOTO ROTATION (UNLIMITED) ===== */
-.photo-box {
-  height: 80vh;
-  border-radius: 28px;
-  overflow: hidden;
-  box-shadow: 0 18px 40px rgba(0,0,0,0.25);
-  position: relative;
-}
-
-.photo-box img {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  opacity: 0;
-  animation: fadeSlide 36s infinite;
-  animation-delay: calc(var(--i) * 4s);
-}
-
-@keyframes fadeSlide {
-  0%   { opacity: 0; }
-  10%  { opacity: 1; }
-  35%  { opacity: 1; }
-  45%  { opacity: 0; }
-  100% { opacity: 0; }
+  overflow-x: hidden;
+  overflow-y: auto; /* ✅ MOBILE SCROLL FIX */
 }
 
 /* ===== QUESTION CARD ===== */
 .question-card {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   background: rgba(255,255,255,0.25);
   backdrop-filter: blur(10px);
-  padding: 40px 35px;
-  border-radius: 26px;
+  padding: 40px;
   text-align: center;
-  box-shadow: 0 20px 45px rgba(0,0,0,0.3);
-  animation: fadeIn 1.2s ease;
 }
 
 .buttons {
-  margin-top: 25px;
+  margin-top: 30px;
   position: relative;
+  width: 200px;
   height: 80px;
 }
 
@@ -96,15 +58,54 @@ button {
   right: 0;
 }
 
-/* ===== MESSAGE CARD ===== */
+/* ===== MAIN CONTENT ===== */
+.wrapper {
+  display: none;
+  max-width: 1300px;
+  margin: auto;
+  padding: 30px 20px;
+  display: grid;
+  grid-template-columns: 1fr 1.2fr 1fr;
+  gap: 25px;
+  align-items: start;
+}
+
+/* ===== PHOTO BOX ===== */
+.photo-box {
+  height: 80vh;
+  border-radius: 28px;
+  overflow: hidden;
+  box-shadow: 0 18px 40px rgba(0,0,0,0.25);
+  position: relative;
+}
+
+.photo-box img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  animation: fadeSlide 36s infinite;
+  animation-delay: calc(var(--i) * 4s);
+}
+
+@keyframes fadeSlide {
+  0% { opacity: 0; }
+  10% { opacity: 1; }
+  35% { opacity: 1; }
+  45% { opacity: 0; }
+  100% { opacity: 0; }
+}
+
+/* ===== MESSAGE ===== */
 .message-card {
   background: rgba(255,255,255,0.25);
   backdrop-filter: blur(10px);
-  padding: 40px 35px;
+  padding: 40px;
   border-radius: 26px;
   text-align: center;
   box-shadow: 0 20px 45px rgba(0,0,0,0.3);
-  animation: fadeIn 1.2s ease;
 }
 
 .message-card h1 {
@@ -113,7 +114,6 @@ button {
 }
 
 .message-card p {
-  font-size: 1.05rem;
   line-height: 1.7;
   margin-bottom: 15px;
 }
@@ -160,23 +160,25 @@ button {
   font-size: 18px;
 }
 
-/* ===== ANIMATIONS ===== */
-@keyframes fadeIn {
-  from { opacity: 0; transform: scale(0.92); }
-  to { opacity: 1; transform: scale(1); }
-}
-
 /* ===== MOBILE ===== */
 @media (max-width: 900px) {
-  .wrapper { grid-template-columns: 1fr; }
-  .photo-box { height: 55vh; }
+  .wrapper {
+    grid-template-columns: 1fr;
+  }
+
+  .photo-box {
+    height: 60vh;
+  }
+
+  .message-card {
+    margin: 30px 0;
+  }
 }
 </style>
 </head>
 
 <body>
 
-<!-- 🎶 MUSIC -->
 <audio id="bgMusic" loop>
   <source src="music.mp3" type="audio/mpeg">
 </audio>
@@ -194,16 +196,16 @@ button {
   </div>
 </div>
 
-<!-- MAIN CONTENT -->
+<!-- CONTENT -->
 <div class="wrapper" id="mainContent">
 
   <!-- LEFT PHOTOS (9) -->
   <div class="photo-box">
-    <img src="photo1.jpg"  style="--i:0">
-    <img src="photo3.jpg"  style="--i:1">
-    <img src="photo5.jpg"  style="--i:2">
-    <img src="photo7.jpg"  style="--i:3">
-    <img src="photo9.jpg"  style="--i:4">
+    <img src="photo1.jpg" style="--i:0">
+    <img src="photo3.jpg" style="--i:1">
+    <img src="photo5.jpg" style="--i:2">
+    <img src="photo7.jpg" style="--i:3">
+    <img src="photo9.jpg" style="--i:4">
     <img src="photo11.jpg" style="--i:5">
     <img src="photo13.jpg" style="--i:6">
     <img src="photo15.jpg" style="--i:7">
@@ -222,10 +224,10 @@ button {
 
   <!-- RIGHT PHOTOS (9) -->
   <div class="photo-box">
-    <img src="photo2.jpg"  style="--i:0">
-    <img src="photo4.jpg"  style="--i:1">
-    <img src="photo6.jpg"  style="--i:2">
-    <img src="photo8.jpg"  style="--i:3">
+    <img src="photo2.jpg" style="--i:0">
+    <img src="photo4.jpg" style="--i:1">
+    <img src="photo6.jpg" style="--i:2">
+    <img src="photo8.jpg" style="--i:3">
     <img src="photo10.jpg" style="--i:4">
     <img src="photo12.jpg" style="--i:5">
     <img src="photo14.jpg" style="--i:6">
@@ -241,9 +243,8 @@ const music = document.getElementById("bgMusic");
 let musicPlaying = false;
 
 function moveNo() {
-  const x = Math.random() * 140 - 70;
-  const y = Math.random() * 40 - 20;
-  noBtn.style.transform = `translate(${x}px, ${y}px)`;
+  noBtn.style.transform =
+    `translate(${Math.random()*120-60}px, ${Math.random()*40-20}px)`;
 }
 
 function sayYes() {
@@ -269,7 +270,7 @@ function confettiBurst() {
   for (let i = 0; i < 120; i++) {
     const c = document.createElement("div");
     c.className = "confetti";
-    c.style.left = Math.random() * 100 + "vw";
+    c.style.left = Math.random()*100 + "vw";
     c.style.background = `hsl(${Math.random()*360},100%,50%)`;
     document.body.appendChild(c);
     setTimeout(() => c.remove(), 3000);
@@ -281,8 +282,7 @@ function startHearts() {
     const h = document.createElement("div");
     h.className = "heart";
     h.innerText = "💖";
-    h.style.left = Math.random() * 100 + "vw";
-    h.style.fontSize = (18 + Math.random() * 12) + "px";
+    h.style.left = Math.random()*100 + "vw";
     document.body.appendChild(h);
     setTimeout(() => h.remove(), 6000);
   }, 500);
